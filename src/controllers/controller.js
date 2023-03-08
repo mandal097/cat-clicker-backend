@@ -36,12 +36,19 @@ router.post('/create-cat', async (req, res) => {
 
 //list of all cats
 router.get('/all-list', async (req, res) => {
-    const list = await CatModel.find();
-    return res.json({
-        status: 'success',
-        message: 'Successfully fetched data',
-        data: list
-    })
+    try {
+        const list = await CatModel.find();
+        return res.json({
+            status: 'success',
+            message: 'Successfully fetched data',
+            data: list
+        })
+    } catch (error) {
+        return res.json({
+            status: 'err',
+            message: 'Server error'
+        })
+    }
 })
 
 
